@@ -1,0 +1,35 @@
+﻿<Window x:Class="WeatherCSApp.Control.CityEditDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WeatherCSApp.Control"
+        mc:Ignorable="d"
+        Title="City editing" Height="150" Width="802">
+    <DockPanel Margin="5">
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="64*"/>
+                <ColumnDefinition Width="265"/>
+                <ColumnDefinition Width="65*"/>
+                <ColumnDefinition Width="118"/>
+                <ColumnDefinition Width="76*"/>
+                <ColumnDefinition Width="212"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0">Name:</Label>
+            <TextBox x:Name="NameText" Grid.Row="0" Grid.Column="1" Margin="24,0,2,0" Text="{Binding Name, Mode=TwoWay}" />
+            <Label Grid.Row="0" Grid.Column="2">Latitude:</Label>
+            <TextBox x:Name="LatitudeText" Grid.Row="0" Grid.Column="3" Text="{Binding Latitude, Mode=TwoWay}" PreviewTextInput="NumberOnly" />
+            <Label Grid.Row="0" Grid.Column="4">Longitude:</Label>
+            <TextBox x:Name="LongitudeText" Grid.Row="0" Grid.Column="5" Text="{Binding Longitude, Mode=TwoWay}" PreviewTextInput="NumberOnly" />
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center" Height="30">
+            <Button x:Name="OkButton" IsDefault="True" Content="Ok" Margin="5" Click="OkButtonClick"/>
+            <Button x:Name="CancelButton" IsCancel="True" Content="Cancel"  Margin="5"/>
+        </StackPanel>
+    </DockPanel>
+</Window>
