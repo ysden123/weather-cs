@@ -1,13 +1,4 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using WeatherCSApp.Control;
 
 namespace WeatherCSApp
@@ -32,6 +23,11 @@ namespace WeatherCSApp
         private void ConfigurationMenuItemClick(object sender, RoutedEventArgs e)
         {
             CC.Content = new ConfigControl();
+        }
+
+        private void ForecastMenuItemClick(object sender, RoutedEventArgs e)
+        {
+            CC.Content = new ForecastControl();
         }
     }
 }
