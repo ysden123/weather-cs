@@ -4,7 +4,6 @@ using System.Drawing.Imaging;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
-//using static System.Net.Mime.MediaTypeNames;
 
 namespace WeatherCSLib
 {

@@ -4,6 +4,27 @@ namespace WeatherCSLib.Data
 {
     public record WeatherConfig(City[]? Cities)
     {
+        private readonly static string _configFile = @$"{Environment.GetEnvironmentVariable("APPDATA")}\weather-cs\WeatherConfig.json";
+
+        public static WeatherConfig? GetAppWeatherConfig()
+        {
+            WeatherConfig? weatherConfig;
+            try
+            {
+                weatherConfig = WeatherConfig.FromFile(_configFile);
+            }
+            catch (Exception)
+            {
+                weatherConfig = null;
+            }
+            return weatherConfig;
+        }
+
+        public bool ToAppFile()
+        {
+            return ToFile(_configFile);
+        }
+
         public override string ToString()
         {
             var result = "{ Cities = [";

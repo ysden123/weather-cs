@@ -12,7 +12,7 @@ namespace WeatherCSApp.Control
     /// </summary>
     public partial class ConfigControl : UserControl
     {
-        private readonly static string _configFile = @$"{Environment.GetEnvironmentVariable("APPDATA")}\weather-cs\WeatherConfig.json";
+        
         readonly ObservableCollection<City> Cities = [];
         private ICollectionView _cityListView;
 
@@ -20,15 +20,7 @@ namespace WeatherCSApp.Control
         public ConfigControl()
         {
             InitializeComponent();
-            WeatherConfig? weatherConfig;
-            try
-            {
-                weatherConfig = WeatherConfig.FromFile(_configFile);
-            }
-            catch (Exception)
-            {
-                weatherConfig = null;
-            }
+            WeatherConfig? weatherConfig = WeatherConfig.GetAppWeatherConfig();
 
             if (weatherConfig != null && weatherConfig.Cities != null)
             {
@@ -102,7 +94,7 @@ namespace WeatherCSApp.Control
         private void ButtonSaveClick(object sender, RoutedEventArgs e)
         {
             var weatherConfig = new WeatherConfig([.. Cities]);
-            if (weatherConfig.ToFile(_configFile))
+            if (weatherConfig.ToAppFile())
                 _changed = false;
             ChangeButtonAvalability();
         }

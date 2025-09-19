@@ -11,7 +11,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="City" DisplayMemberBinding="{Binding CityName}" Width="100"/>
-                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="200"/>
+                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="60"/>
                     <GridViewColumn Width="50">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

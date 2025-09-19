@@ -15,7 +15,7 @@ namespace WeatherCSLib
                     forecast = new Forecast()
                     {
                         CityName = city.Name,
-                        Icon = "",
+                        Icon = response.Daily.Icon,
                         Status = "Done",
                         MaxT = response.Daily.FindMaxTemperature(),
                         MinT = response.Daily.FindMinTemperature(),

@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Controls;
+using WeatherCSLib;
+using WeatherCSLib.Data;
 
 namespace WeatherCSApp.Control
 {
@@ -9,7 +11,7 @@ namespace WeatherCSApp.Control
     /// </summary>
     public partial class ForecastControl : UserControl
     {
-        private readonly Dictionary<string, string> icons = new()
+        private static readonly Dictionary<string, string> icons = new()
         {
             {"clear", "Resources\\clear.png" },
             {"clear-day", "Resources\\clear-day.png" },
@@ -23,37 +25,65 @@ namespace WeatherCSApp.Control
             {"snow", "Resources\\snow.png" },
             {"wind", "Resources\\wind.png" },
         };
+
+        private readonly WeatherConfig? _weatherConfig;
+
         public ForecastControl()
         {
             InitializeComponent();
-            ObservableCollection<ForecastModel> forecasts = [new ForecastModel() { CityName = "Test", Status = "Wait..." }];
+            _weatherConfig = WeatherConfig.GetAppWeatherConfig();
+            ObservableCollection<ForecastModel> forecasts = FillInitial();
             forecastListView.ItemsSource = forecasts;
 
             FillData(forecasts);
         }
 
+        private ObservableCollection<ForecastModel> FillInitial()
+        {
+            ObservableCollection<ForecastModel> forecasts = [];
+            if (_weatherConfig != null)
+            {
+                City[]? cities = _weatherConfig!.Cities;
+                foreach (var city in cities!)
+                {
+                    forecasts.Add(new ForecastModel() { CityName = city.Name, Status = "Wait..." });
+                }
+            }
+            return forecasts;
+        }
         private async void FillData(ObservableCollection<ForecastModel> forecasts)
         {
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
-                Thread.Sleep(3000);
-                //var iconName = "clearERROR";
-                var iconName = "clear-day";
-                string? iconPath;
-                icons.TryGetValue(iconName, out iconPath);
-                if (iconPath == null) { iconPath = ""; }
-                Dispatcher.Invoke(new Action(() =>
+                City[]? cities = _weatherConfig!.Cities;
+                for (var i = 0; i < cities?.Length; i++)
                 {
-                    forecasts[0] = new ForecastModel()
+                    var city = cities[i];
+                    var forecast = await ForecastService.GetForecast(city);
+                    icons.TryGetValue(forecast.Icon, out string? iconPath);
+                    string? theIconPath;
+                    if (iconPath != null)
                     {
-                        CityName = forecasts[0].CityName,
-                        Status = "Done",
-                        Summary = "Summary text",
-                        //IconImagePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Resources\\clear.png")
-                        IconImagePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), iconPath)
-                    };
-                }));
+                        theIconPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), iconPath);
+                    }
+                    else
+                    {
+                        theIconPath = null;
+                    }
 
+                    Dispatcher.Invoke(new Action(() =>
+                    {
+                        forecasts[i] = new ForecastModel()
+                        {
+                            CityName = city.Name,
+                            Status = "Done",
+                            Summary = forecast.Summary,
+                            MaxT = forecast.MaxT,
+                            MinT = forecast.MinT,
+                            IconImagePath = theIconPath!
+                        };
+                    }));
+                }
             });
         }
     }
