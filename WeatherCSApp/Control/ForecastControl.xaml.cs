@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.IO;
 using System.Windows.Controls;
 using WeatherCSLib;
 using WeatherCSLib.Data;
@@ -11,22 +10,7 @@ namespace WeatherCSApp.Control
     /// </summary>
     public partial class ForecastControl : UserControl
     {
-        private static readonly Dictionary<string, string> icons = new()
-        {
-            {"clear", "Resources\\clear.png" },
-            {"clear-day", "Resources\\clear-day.png" },
-            {"clear-night", "Resources\\clear-night.png" },
-            {"cloudy", "Resources\\cloudy.png" },
-            {"fog", "Resources\\fog.png" },
-            {"partly-cloudy-day", "Resources\\partly-cloudy-day.png" },
-            {"partly-cloudy-night", "Resources\\partly-cloudy-night.png" },
-            {"rain", "Resources\\rain.png" },
-            {"sleet", "Resources\\sleet.png" },
-            {"snow", "Resources\\snow.png" },
-            {"wind", "Resources\\wind.png" },
-        };
-
-        private readonly WeatherConfig? _weatherConfig;
+         private readonly WeatherConfig? _weatherConfig;
 
         public ForecastControl()
         {
@@ -51,6 +35,7 @@ namespace WeatherCSApp.Control
             }
             return forecasts;
         }
+
         private async void FillData(ObservableCollection<ForecastModel> forecasts)
         {
             await Task.Run(async () =>
@@ -60,29 +45,23 @@ namespace WeatherCSApp.Control
                 {
                     var city = cities[i];
                     var forecast = await ForecastService.GetForecast(city);
-                    icons.TryGetValue(forecast.Icon, out string? iconPath);
-                    string? theIconPath;
-                    if (iconPath != null)
+                    if (forecast != null)
                     {
-                        theIconPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), iconPath);
-                    }
-                    else
-                    {
-                        theIconPath = null;
-                    }
+                        var iconPath = ForecastService.BuildIconPath(forecast.Icon!);
 
-                    Dispatcher.Invoke(new Action(() =>
-                    {
-                        forecasts[i] = new ForecastModel()
+                        Dispatcher.Invoke(new Action(() =>
                         {
-                            CityName = city.Name,
-                            Status = "Done",
-                            Summary = forecast.Summary,
-                            MaxT = forecast.MaxT,
-                            MinT = forecast.MinT,
-                            IconImagePath = theIconPath!
-                        };
-                    }));
+                            forecasts[i] = new ForecastModel()
+                            {
+                                CityName = city.Name,
+                                Status = "Done",
+                                Summary = forecast.Summary,
+                                MaxT = forecast.MaxT,
+                                MinT = forecast.MinT,
+                                IconImagePath = iconPath!
+                            };
+                        }));
+                    }
                 }
             });
         }

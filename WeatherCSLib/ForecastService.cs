@@ -4,6 +4,21 @@ namespace WeatherCSLib
 {
     public class ForecastService
     {
+        private static readonly Dictionary<string, string> icons = new()
+        {
+            {"clear", "Resources\\clear.png" },
+            {"clear-day", "Resources\\clear-day.png" },
+            {"clear-night", "Resources\\clear-night.png" },
+            {"cloudy", "Resources\\cloudy.png" },
+            {"fog", "Resources\\fog.png" },
+            {"partly-cloudy-day", "Resources\\partly-cloudy-day.png" },
+            {"partly-cloudy-night", "Resources\\partly-cloudy-night.png" },
+            {"rain", "Resources\\rain.png" },
+            {"sleet", "Resources\\sleet.png" },
+            {"snow", "Resources\\snow.png" },
+            {"wind", "Resources\\wind.png" },
+        };
+
         public static async Task<Forecast> GetForecast(City city)
         {
             try
@@ -27,7 +42,7 @@ namespace WeatherCSLib
                     forecast = new Forecast()
                     {
                         CityName = city.Name,
-                        Icon = "",
+                        Icon = null,
                         Status = "Error",
                         MaxT = 0.0,
                         MinT = 0.0,
@@ -57,6 +72,24 @@ namespace WeatherCSLib
                 forecasts.Add(forecastTask.Result);
             }
             return forecasts;
+        }
+    
+        public static string? BuildIconPath(string iconName)
+        {
+            if (iconName == null)
+                return null;
+
+            icons.TryGetValue(iconName, out string? iconPath);
+            string? theIconPath;
+            if (iconPath != null)
+            {
+                theIconPath = Path.Combine(Directory.GetCurrentDirectory(), iconPath);
+            }
+            else
+            {
+                theIconPath = null;
+            }
+            return theIconPath;
         }
     }
 }
