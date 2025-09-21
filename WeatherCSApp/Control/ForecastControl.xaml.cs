@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
-using WeatherCSLib;
+using System.Windows.Input;
 using WeatherCSLib.Data;
 
 namespace WeatherCSApp.Control
@@ -10,61 +10,44 @@ namespace WeatherCSApp.Control
     /// </summary>
     public partial class ForecastControl : UserControl
     {
-         private readonly WeatherConfig? _weatherConfig;
+        private readonly WeatherConfig? _weatherConfig;
 
         public ForecastControl()
         {
             InitializeComponent();
             _weatherConfig = WeatherConfig.GetAppWeatherConfig();
-            ObservableCollection<ForecastModel> forecasts = FillInitial();
-            forecastListView.ItemsSource = forecasts;
-
-            FillData(forecasts);
+            FillData();
         }
 
-        private ObservableCollection<ForecastModel> FillInitial()
+        private async void FillData()
         {
-            ObservableCollection<ForecastModel> forecasts = [];
-            if (_weatherConfig != null)
-            {
-                City[]? cities = _weatherConfig!.Cities;
-                foreach (var city in cities!)
-                {
-                    forecasts.Add(new ForecastModel() { CityName = city.Name, Status = "Wait..." });
-                }
-            }
-            return forecasts;
-        }
-
-        private async void FillData(ObservableCollection<ForecastModel> forecasts)
-        {
+            var currentCursor = forecastListView.Cursor;
+            forecastListView.Cursor = Cursors.Wait;
             await Task.Run(async () =>
             {
-                City[]? cities = _weatherConfig!.Cities;
-                for (var i = 0; i < cities?.Length; i++)
+                var forecasts = await ForecastService.GetForecastAll(_weatherConfig!.Cities);
+                ObservableCollection<ForecastModel> forecastModels = [];
+                foreach (var forecast in forecasts)
                 {
-                    var city = cities[i];
-                    var forecast = await ForecastService.GetForecast(city);
-                    if (forecast != null)
+                    var iconPath = ForecastService.BuildIconPath(forecast.Icon!);
+                    forecastModels.Add(new ForecastModel()
                     {
-                        var iconPath = ForecastService.BuildIconPath(forecast.Icon!);
-
-                        Dispatcher.Invoke(new Action(() =>
-                        {
-                            forecasts[i] = new ForecastModel()
-                            {
-                                CityName = city.Name,
-                                Status = "Done",
-                                Summary = forecast.Summary,
-                                T = forecast.T,
-                                MaxT = forecast.MaxT,
-                                MinT = forecast.MinT,
-                                IconImagePath = iconPath!
-                            };
-                        }));
-                    }
+                        CityName = forecast.CityName,
+                        Status = "Done",
+                        Summary = forecast.Summary,
+                        T = forecast.T,
+                        MaxT = forecast.MaxT,
+                        MinT = forecast.MinT,
+                        IconImagePath = iconPath!
+                    });
                 }
+                Dispatcher.Invoke(new Action(() =>
+                {
+                    forecastListView.ItemsSource = forecastModels;
+                }));
             });
+
+            forecastListView.Cursor = currentCursor;
         }
     }
 }
