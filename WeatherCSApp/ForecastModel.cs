@@ -6,6 +6,7 @@
         public required string Status { get; set; }
         public string? IconImagePath { get; set; }
         public string? Summary { get; set; }
+        public double T { get; set; }
         public double MaxT { get; set; }
         public double MinT { get; set; }
     }

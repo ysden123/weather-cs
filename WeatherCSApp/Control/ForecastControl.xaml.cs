@@ -56,6 +56,7 @@ namespace WeatherCSApp.Control
                                 CityName = city.Name,
                                 Status = "Done",
                                 Summary = forecast.Summary,
+                                T = forecast.T,
                                 MaxT = forecast.MaxT,
                                 MinT = forecast.MinT,
                                 IconImagePath = iconPath!

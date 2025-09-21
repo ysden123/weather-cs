@@ -30,11 +30,12 @@ namespace WeatherCSLib
                     forecast = new Forecast()
                     {
                         CityName = city.Name,
-                        Icon = response.Daily.Icon,
+                        Icon = response.Currently.Icon,
                         Status = "Done",
+                        T = response.Currently.Temperature,
                         MaxT = response.Daily.FindMaxTemperature(),
                         MinT = response.Daily.FindMinTemperature(),
-                        Summary = response.Daily.Summary
+                        Summary = response.Currently.Summary
                     };
                 }
                 else
@@ -44,6 +45,7 @@ namespace WeatherCSLib
                         CityName = city.Name,
                         Icon = null,
                         Status = "Error",
+                        T = 0.0,
                         MaxT = 0.0,
                         MinT = 0.0,
                         Summary = ""

@@ -20,6 +20,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Summary" DisplayMemberBinding="{Binding Summary}" Width="150"/>
+                    <GridViewColumn Header="t" DisplayMemberBinding="{Binding T}" Width="50"/>
                     <GridViewColumn Header="Max t" DisplayMemberBinding="{Binding MaxT}" Width="150"/>
                     <GridViewColumn Header="Min t" DisplayMemberBinding="{Binding MinT}" Width="150"/>
                 </GridView>
