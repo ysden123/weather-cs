@@ -1,3 +1,5 @@
-= PDotNet
+= weather-cs
 
-Playing with .Net
+Weather with .Net.
+
+Includes editing the configuration of cities and forecast view.
