@@ -1,4 +1,4 @@
-﻿using WeatherCSLib.Data;
+﻿using WeatherCSApp.Data;
 
 namespace WeatherCSTest.Data
 {

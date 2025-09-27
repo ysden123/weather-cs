@@ -1,4 +1,4 @@
-﻿namespace WeatherCSLib.Data
+﻿namespace WeatherCSApp.Data
 {
     public record DataItem
     {

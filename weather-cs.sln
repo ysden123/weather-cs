@@ -1,13 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36221.1 d17.14
+VisualStudioVersion = 17.14.36221.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherCSApp", "WeatherCSApp\WeatherCSApp.csproj", "{0F3BCBCD-1880-4B28-BD5F-7C80D20703E5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherCSTest", "WeatherCSTest\WeatherCSTest.csproj", "{D6F19A1D-1F5E-46FB-AA76-CF37F164D5D7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherCSLib", "WeatherCSLib\WeatherCSLib.csproj", "{FBBB795C-ABD0-48F3-8277-C2A0D85A06AA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0F3BCBCD-1880-4B28-BD5F-7C80D20703E5} = {0F3BCBCD-1880-4B28-BD5F-7C80D20703E5}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +24,6 @@ Global
 		{D6F19A1D-1F5E-46FB-AA76-CF37F164D5D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6F19A1D-1F5E-46FB-AA76-CF37F164D5D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6F19A1D-1F5E-46FB-AA76-CF37F164D5D7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FBBB795C-ABD0-48F3-8277-C2A0D85A06AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FBBB795C-ABD0-48F3-8277-C2A0D85A06AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FBBB795C-ABD0-48F3-8277-C2A0D85A06AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FBBB795C-ABD0-48F3-8277-C2A0D85A06AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

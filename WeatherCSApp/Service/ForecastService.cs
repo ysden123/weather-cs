@@ -1,7 +1,6 @@
-﻿using WeatherCSLib;
-using WeatherCSLib.Data;
+﻿using WeatherCSApp.Data;
 
-namespace WeatherCSApp
+namespace WeatherCSApp.Service
 {
     public class ForecastService
     {
@@ -25,7 +24,7 @@ namespace WeatherCSApp
             try
             {
                 Forecast forecast;
-                Response? response = await Transport.GetWeather(city);
+                Response? response = await TransportService.GetWeather(city);
                 if (response != null)
                 {
                     forecast = new Forecast()

@@ -1,6 +1,7 @@
-﻿using System.Text.Json;
+﻿using System.IO;
+using System.Text.Json;
 
-namespace WeatherCSLib.Data
+namespace WeatherCSApp.Data
 {
     public record WeatherConfig(City[]? Cities)
     {

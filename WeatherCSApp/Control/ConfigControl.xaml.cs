@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using WeatherCSLib.Data;
+using WeatherCSApp.Data;
 
 namespace WeatherCSApp.Control
 {

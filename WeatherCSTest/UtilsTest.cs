@@ -1,4 +1,4 @@
-﻿using WeatherCSLib;
+﻿using WeatherCSApp;
 
 namespace WeatherCSTest
 {

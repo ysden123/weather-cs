@@ -1,4 +1,4 @@
-﻿namespace WeatherCSApp
+﻿namespace WeatherCSApp.Data
 {
     public record ForecastModel
     {

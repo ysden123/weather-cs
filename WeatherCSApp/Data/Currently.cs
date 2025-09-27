@@ -1,16 +1,16 @@
-﻿namespace WeatherCSLib.Data
+﻿namespace WeatherCSApp.Data
 {
     public record Currently
     {
         public long Time { get; set; }
-        public string Summary { get; set; }
-        public string Icon { get; set; }
+        public string? Summary { get; set; }
+        public string? Icon { get; set; }
         public double NearestStormDistance { get; set; }
         public double NearestStormBearing { get; set; }
         public double PrecipIntensity { get; set; }
         public double PrecipProbability { get; set; }
         public double PrecipIntensityError { get; set; }
-        public string PrecipType { get; set; }
+        public string? PrecipType { get; set; }
         public double Temperature { get; set; }
         public double ApparentTemperature { get; set; }
         public double DewPoint { get; set; }

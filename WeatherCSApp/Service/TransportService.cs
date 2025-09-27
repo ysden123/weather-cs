@@ -1,8 +1,9 @@
-﻿using WeatherCSLib.Data;
+﻿using System.Net.Http;
+using WeatherCSApp.Data;
 
-namespace WeatherCSLib
+namespace WeatherCSApp.Service
 {
-    public class Transport
+    public class TransportService
     {
         public static async Task<Response?> GetWeather(City city)
         {

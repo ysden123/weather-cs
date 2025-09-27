@@ -1,7 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WeatherCSLib.Data;
+using WeatherCSApp.Data;
+using WeatherCSApp.Service;
 
 namespace WeatherCSApp.Control
 {

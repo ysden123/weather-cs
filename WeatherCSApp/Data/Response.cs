@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace WeatherCSLib.Data
+namespace WeatherCSApp.Data
 {
     public record Response
     {
