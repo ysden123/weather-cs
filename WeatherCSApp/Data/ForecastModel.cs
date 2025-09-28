@@ -1,13 +1,12 @@
-﻿namespace WeatherCSApp.Data
+﻿namespace WeatherCSApp.Data;
+
+public record ForecastModel
 {
-    public record ForecastModel
-    {
-        public required string CityName { get; set; }
-        public required string Status { get; set; }
-        public string? IconImagePath { get; set; }
-        public string? Summary { get; set; }
-        public double T { get; set; }
-        public double MaxT { get; set; }
-        public double MinT { get; set; }
-    }
+    public required string CityName { get; set; }
+    public required string Status { get; set; }
+    public string? IconImagePath { get; set; }
+    public string? Summary { get; set; }
+    public double T { get; set; }
+    public double MaxT { get; set; }
+    public double MinT { get; set; }
 }

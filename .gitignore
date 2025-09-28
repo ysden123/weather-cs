@@ -2,4 +2,5 @@
 packages/
 **/obj
 **/bin
+**/Properties
 *.user
