@@ -6,21 +6,24 @@
              xmlns:local="clr-namespace:WeatherCSApp.Control"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <DockPanel>
-        <ListView x:Name="ListView_Cites" Margin="4,0,1,10" DockPanel.Dock="Top" SelectionChanged="ListView_Cites_SelectionChanged">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="City Name" Width="120" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="Latitude" Width="70" DisplayMemberBinding="{Binding Latitude}"/>
-                    <GridViewColumn Header="Longitude" Width="70" DisplayMemberBinding="{Binding Longitude}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Height="40" HorizontalAlignment="Center">
-            <Button x:Name="ButtonAdd" Content="Add" Margin="5" Click="ButtonAddClick"/>
-            <Button x:Name="ButtonEdit" Content="Edit" Margin="5" Click="ButtonEditClick"/>
-            <Button x:Name="ButtonDelete" Content="Delete" Margin="5" Click="ButtonDeleteClick"/>
-            <Button x:Name="ButtonSave" Content="Save" Margin="5" Click="ButtonSaveClick"/>
-        </StackPanel>
-    </DockPanel>
+    <GroupBox Margin="5">
+        <GroupBox.Header>Configuration</GroupBox.Header>
+        <DockPanel Margin="5">
+            <ListView x:Name="ListView_Cites" Margin="4,0,1,10" DockPanel.Dock="Top" SelectionChanged="ListView_Cites_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="City Name" Width="120" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Latitude" Width="70" DisplayMemberBinding="{Binding Latitude}"/>
+                        <GridViewColumn Header="Longitude" Width="70" DisplayMemberBinding="{Binding Longitude}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Height="40" HorizontalAlignment="Center">
+                <Button x:Name="ButtonAdd" Content="Add" Margin="5" Click="ButtonAddClick"/>
+                <Button x:Name="ButtonEdit" Content="Edit" Margin="5" Click="ButtonEditClick"/>
+                <Button x:Name="ButtonDelete" Content="Delete" Margin="5" Click="ButtonDeleteClick"/>
+                <Button x:Name="ButtonSave" Content="Save" Margin="5" Click="ButtonSaveClick"/>
+            </StackPanel>
+        </DockPanel>
+    </GroupBox>
 </UserControl>

@@ -6,25 +6,28 @@
              xmlns:local="clr-namespace:WeatherCSApp.Control"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <ListView x:Name="forecastListView" Margin="10">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="City" DisplayMemberBinding="{Binding CityName}" Width="100"/>
-                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="60"/>
-                    <GridViewColumn Width="50">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image Source="{Binding IconImagePath}" Width="20" Height="20"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Summary" DisplayMemberBinding="{Binding Summary}" Width="150"/>
-                    <GridViewColumn Header="t" DisplayMemberBinding="{Binding T}" Width="50"/>
-                    <GridViewColumn Header="Max t" DisplayMemberBinding="{Binding MaxT}" Width="150"/>
-                    <GridViewColumn Header="Min t" DisplayMemberBinding="{Binding MinT}" Width="150"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-    </Grid>
+    <GroupBox Margin="5">
+        <GroupBox.Header>Forecast</GroupBox.Header>
+        <Grid Margin="5">
+            <ListView x:Name="forecastListView" Margin="10">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="City" DisplayMemberBinding="{Binding CityName}" Width="100"/>
+                        <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="60"/>
+                        <GridViewColumn Width="50">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding IconImagePath}" Width="20" Height="20"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Summary" DisplayMemberBinding="{Binding Summary}" Width="150"/>
+                        <GridViewColumn Header="t" DisplayMemberBinding="{Binding T}" Width="50"/>
+                        <GridViewColumn Header="Max t" DisplayMemberBinding="{Binding MaxT}" Width="150"/>
+                        <GridViewColumn Header="Min t" DisplayMemberBinding="{Binding MinT}" Width="150"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </GroupBox>
 </UserControl>
