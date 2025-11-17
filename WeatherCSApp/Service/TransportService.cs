@@ -1,10 +1,12 @@
-﻿using System.Net.Http;
+﻿using Serilog;
+using System.Net.Http;
 using WeatherCSApp.Data;
 
 namespace WeatherCSApp.Service
 {
     public class TransportService
     {
+        private readonly static ILogger _logger = Log.ForContext<TransportService>();
         public static async Task<Response?> GetWeather(City city)
         {
             using var client = new HttpClient();
@@ -21,6 +23,7 @@ namespace WeatherCSApp.Service
             }
             catch (Exception ex)
             {
+                _logger.Error("Error fetching weather data: {Message}", ex.Message);
                 Console.WriteLine(ex.Message);
                 throw;
             }

@@ -1,9 +1,11 @@
-﻿using WeatherCSApp.Data;
+﻿using Serilog;
+using WeatherCSApp.Data;
 
 namespace WeatherCSApp.Service
 {
     public class ForecastService
     {
+        private readonly static ILogger _logger= Log.ForContext<ForecastService>();
         private static readonly Dictionary<string, string> icons = new()
         {
             {"clear", "/Resources/clear.png" },
@@ -55,6 +57,7 @@ namespace WeatherCSApp.Service
             }
             catch (Exception ex)
             {
+                _logger.Error("Error in GetForecast: {Message}", ex.Message);
                 Console.WriteLine(ex.Message);
                 throw;
             }
