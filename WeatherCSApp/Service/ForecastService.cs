@@ -70,13 +70,21 @@ namespace WeatherCSApp.Service
             {
                 forecastTasks.Add(GetForecast(city));
             }
-            await Task.WhenAll(forecastTasks);
-            var forecasts = new List<Forecast>();
-            foreach (var forecastTask in forecastTasks)
+
+            try
             {
-                forecasts.Add(forecastTask.Result);
+                await Task.WhenAll(forecastTasks);
+                var forecasts = new List<Forecast>();
+                foreach (var forecastTask in forecastTasks)
+                {
+                    forecasts.Add(forecastTask.Result);
+                }
+                return forecasts;
             }
-            return forecasts;
+            catch (Exception)
+            {
+                throw;
+            }
         }
     
         public static string? BuildIconPath(string iconName)

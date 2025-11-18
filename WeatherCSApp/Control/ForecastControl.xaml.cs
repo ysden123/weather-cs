@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WeatherCSApp.Data;
@@ -26,26 +27,33 @@ namespace WeatherCSApp.Control
             forecastListView.Cursor = Cursors.Wait;
             await Task.Run(async () =>
             {
-                var forecasts = await ForecastService.GetForecastAll(_weatherConfig!.Cities);
-                ObservableCollection<ForecastModel> forecastModels = [];
-                foreach (var forecast in forecasts)
+                try
                 {
-                    var iconPath = ForecastService.BuildIconPath(forecast.Icon!);
-                    forecastModels.Add(new ForecastModel()
+                    var forecasts = await ForecastService.GetForecastAll(_weatherConfig!.Cities);
+                    ObservableCollection<ForecastModel> forecastModels = [];
+                    foreach (var forecast in forecasts)
                     {
-                        CityName = forecast.CityName,
-                        Status = "Done",
-                        Summary = forecast.Summary,
-                        T = forecast.T,
-                        MaxT = forecast.MaxT,
-                        MinT = forecast.MinT,
-                        IconImagePath = iconPath!
-                    });
+                        var iconPath = ForecastService.BuildIconPath(forecast.Icon!);
+                        forecastModels.Add(new ForecastModel()
+                        {
+                            CityName = forecast.CityName,
+                            Status = "Done",
+                            Summary = forecast.Summary,
+                            T = forecast.T,
+                            MaxT = forecast.MaxT,
+                            MinT = forecast.MinT,
+                            IconImagePath = iconPath!
+                        });
+                    }
+                    Dispatcher.Invoke(new Action(() =>
+                    {
+                        forecastListView.ItemsSource = forecastModels;
+                    }));
                 }
-                Dispatcher.Invoke(new Action(() =>
+                catch (Exception)
                 {
-                    forecastListView.ItemsSource = forecastModels;
-                }));
+                    MessageBox.Show("Error fetching forecasts. See logs.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             });
 
             forecastListView.Cursor = currentCursor;
