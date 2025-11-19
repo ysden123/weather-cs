@@ -30,6 +30,9 @@ namespace WeatherCSApp.Control
                 try
                 {
                     var forecasts = await ForecastService.GetForecastAll(_weatherConfig!.Cities);
+
+                    forecasts.Sort((f1, f2) => string.Compare(f1.CityName, f2.CityName, StringComparison.Ordinal));
+
                     ObservableCollection<ForecastModel> forecastModels = [];
                     foreach (var forecast in forecasts)
                     {
@@ -45,6 +48,7 @@ namespace WeatherCSApp.Control
                             IconImagePath = iconPath!
                         });
                     }
+
                     Dispatcher.Invoke(new Action(() =>
                     {
                         forecastListView.ItemsSource = forecastModels;
