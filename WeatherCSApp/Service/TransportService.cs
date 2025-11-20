@@ -17,6 +17,7 @@ namespace WeatherCSApp.Service
                 var response = await Task<Response>.Run(async () =>
                 {
                     var responseJson = await client.GetStringAsync(url);
+                    _logger.Debug("Received response: {ResponseJson}", responseJson);
                     return Response.FromJson(responseJson);
                 });
                 return response;

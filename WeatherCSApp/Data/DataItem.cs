@@ -28,7 +28,7 @@
         public required double WindSpeed { get; set; }
         public required double WindGust { get; set; }
         public required long WindGustTime { get; set; }
-        public required int WindBearing { get; set; }
+        public required double WindBearing { get; set; }
         public required double CloudCover { get; set; }
         public required double UvIndex { get; set; }
         public required long UvIndexTime { get; set; }
