@@ -2,8 +2,6 @@
 {
     public record Daily
     {
-        public required string Summary { get; set; }
-        public required string Icon { get; set; }
         public required List<DataItem> data { get; set; }
 
         public double FindMaxTemperature()
